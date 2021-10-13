@@ -1,13 +1,15 @@
 <template>
-  <div>登录</div>
-  <el-button>Default</el-button>
-  <el-button type="primary">Primary</el-button>
-  <el-button type="success">Success</el-button>
+  <div class="login">
+    <login-panel />
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+import LoginPanel from './components/login-panel.vue'
 
 export default defineComponent({
-  name: 'Login'
+  components: {
+    LoginPanel
+  }
 })
 </script>

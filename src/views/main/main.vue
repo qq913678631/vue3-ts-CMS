@@ -8,4 +8,3 @@ export default defineComponent({
   name: ''
 })
 </script>
-<style lang="scss" scoped></style>
