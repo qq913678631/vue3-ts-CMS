@@ -5,7 +5,8 @@ import '@/theme'
 import { setupStore } from '@/plugins/store/index'
 
 const app = createApp(App)
-AppPlugin.install(app)
+// 动态添加路由
 setupStore()
+AppPlugin.install(app)
 
 app.mount('#app')

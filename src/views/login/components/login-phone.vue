@@ -1,11 +1,6 @@
 <template>
   <div class="login-phone">
-    <el-form
-      :model="phoneLogin"
-      :rules="rules"
-      label-width="80px"
-      ref="formRef"
-    >
+    <el-form :model="phoneLogin" :rules="rules" label-width="80px" ref="formRef">
       <el-form-item label="手机号" prop="phone">
         <el-input v-model="phoneLogin.phone"></el-input>
       </el-form-item>

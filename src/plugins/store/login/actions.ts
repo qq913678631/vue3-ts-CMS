@@ -3,11 +3,8 @@ import { ILoginState } from './type'
 import { IUser } from '@/service/login/type'
 import router from '@/plugins/router'
 import localCache from '@/utils/cache'
-import {
-  userLoginRequest,
-  getUserInfoById,
-  getUserMenusById
-} from '@/service/login/login'
+import { userLoginRequest, getUserInfoById, getUserMenusById } from '@/service/login/login'
+import { mapMenusToRoutees } from '@/utils/map-menus'
 
 export const actions: ActionTree<ILoginState, any> = {
   async userLoginAction({ commit }, payload: IUser) {
@@ -27,6 +24,10 @@ export const actions: ActionTree<ILoginState, any> = {
     commit('setUserMenus', userMenus)
     localCache.setCache('userMenus', userMenus)
 
+    const routes = mapMenusToRoutees(userMenus)
+    routes.forEach((route) => {
+      router.addRoute('main', route)
+    })
     router.push('/main')
   },
 
@@ -41,7 +42,12 @@ export const actions: ActionTree<ILoginState, any> = {
     }
     const userMenus = localCache.getCache('userMenus')
     if (userMenus) {
-      commit('setUserToken', userMenus)
+      commit('setUserMenus', userMenus)
     }
+
+    const routes = mapMenusToRoutees(userMenus)
+    routes.forEach((route) => {
+      router.addRoute('main', route)
+    })
   }
 }
