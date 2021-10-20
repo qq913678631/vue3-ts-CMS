@@ -1,3 +1,5 @@
+import { IDataType } from '../type'
+
 export interface IUser {
   name: string
   password: string
@@ -15,7 +17,4 @@ export interface ILoginResult {
   token: string
 }
 
-export interface IDataType<T = any> {
-  code: number
-  data: T
-}
+export { IDataType }

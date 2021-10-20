@@ -9,7 +9,8 @@ const loginModule: Module<ILoginState, IRootState> = {
   state: {
     token: '',
     userInfo: {},
-    userMenus: []
+    userMenus: [],
+    permissions: []
   },
   mutations: mutations,
   actions: actions

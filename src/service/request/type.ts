@@ -8,8 +8,7 @@ export interface ZCRequestInterceptors<T = AxiosResponse<any>> {
   responseIntercepCatch?: (error: any) => any
 }
 
-export interface ZCRequestConfig<T = AxiosResponse<any>>
-  extends AxiosRequestConfig {
+export interface ZCRequestConfig<T = AxiosResponse<any>> extends AxiosRequestConfig {
   interceptors?: ZCRequestInterceptors<T>
   showLoading?: boolean
 }

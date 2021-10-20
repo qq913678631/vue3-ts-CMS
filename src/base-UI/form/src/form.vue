@@ -7,7 +7,12 @@
       <el-row>
         <template v-for="item in formItems" :key="item.label">
           <el-col v-bind="colLayout">
-            <el-form-item :label="item.label" :rules="item.rules" :style="itemStyle">
+            <el-form-item
+              :label="item.label"
+              :rules="item.rules"
+              :style="itemStyle"
+              v-if="!item.isHidden"
+            >
               <template v-if="item.type === 'input' || item.type === 'password'">
                 <el-input
                   :placeholder="item.placeholder"
@@ -48,7 +53,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref, watch } from 'vue'
+import { defineComponent, PropType, reactive, watch } from 'vue'
 import { IFormItem } from '../type/index'
 export default defineComponent({
   props: {
@@ -83,7 +88,13 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
-    const formData = ref({ ...props.modelValue })
+    const formData = reactive({ ...props.modelValue })
+    watch(
+      () => props.modelValue,
+      (newValue) => {
+        formData.value = { ...newValue }
+      }
+    )
     watch(
       formData,
       (newValue) => {
