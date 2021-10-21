@@ -1,6 +1,11 @@
 import { ActionTree } from 'vuex/types/index.js'
 import { ISystemState } from './type'
-import { getPageListData, deletePageDataById } from '@/service/main/system/system'
+import {
+  getPageListData,
+  deletePageDataById,
+  createPageData,
+  editPageData
+} from '@/service/main/system/system'
 
 export const actions: ActionTree<ISystemState, any> = {
   async getPageListAction({ commit }, payload: any) {
@@ -17,6 +22,32 @@ export const actions: ActionTree<ISystemState, any> = {
     await deletePageDataById(pageUrl)
     dispatch('getPageListAction', {
       url: `/${url}/list`,
+      queryInfo: {
+        offset: 0,
+        size: 10
+      }
+    })
+  },
+
+  async createPageDataAction({ dispatch }, payload: any) {
+    const { pageName, queryInfo } = payload
+    const pageUrl = `/${pageName}`
+    await createPageData(pageUrl, queryInfo)
+    dispatch('getPageListAction', {
+      url: `/${pageName}/list`,
+      queryInfo: {
+        offset: 0,
+        size: 10
+      }
+    })
+  },
+
+  async editPageDataAction({ dispatch }, payload: any) {
+    const { pageName, queryInfo, id } = payload
+    const pageUrl = `/${pageName}/${id}`
+    await editPageData(pageUrl, queryInfo)
+    dispatch('getPageListAction', {
+      url: `/${pageName}/list`,
       queryInfo: {
         offset: 0,
         size: 10

@@ -16,7 +16,9 @@
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item icon="el-icon-circle-close">退出登录</el-dropdown-item>
+              <el-dropdown-item icon="el-icon-circle-close" @click="logOut"
+                >退出登录</el-dropdown-item
+              >
               <el-dropdown-item icon="el-icon-user">用户信息</el-dropdown-item>
               <el-dropdown-item icon="el-icon-setting">系统管理</el-dropdown-item>
             </el-dropdown-menu>
@@ -30,8 +32,9 @@
 import { useStore } from 'vuex'
 import { computed, defineComponent, ref } from 'vue'
 import Breadcrumb from '@/base-UI/breadcrumb/index'
+import localCache from '@/utils/cache'
 import { pathMapBreadcrumbs } from '@/utils/map-menus'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 export default defineComponent({
   components: {
     Breadcrumb
@@ -40,6 +43,7 @@ export default defineComponent({
     const isFold = ref(false)
 
     const store = useStore()
+    const router = useRouter()
     const userName = computed(() => store.state.login.userInfo.name)
 
     // 面包屑数据
@@ -50,11 +54,17 @@ export default defineComponent({
       return pathMapBreadcrumbs(userMenus, currentPath)
     })
 
+    // logOut退出登录
+    const logOut = () => {
+      localCache.deleteCache('token')
+      router.push('/main')
+    }
+
     const handleFoldClick = () => {
       isFold.value = !isFold.value
       emit('handleFoldClick', isFold.value)
     }
-    return { userName, handleFoldClick, isFold, breadcrumbs }
+    return { userName, logOut, handleFoldClick, isFold, breadcrumbs }
   }
 })
 </script>

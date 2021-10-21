@@ -17,7 +17,8 @@
       ></page-content>
       <page-modal
         :defaultInfo="defaultInfo"
-        :modalConfig="modalConfig"
+        :modalConfig="modalConfigRef"
+        pageName="users"
         ref="PageModalRef"
       ></page-modal>
     </el-card>
@@ -25,7 +26,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
+import { useStore } from 'vuex'
 
 import PageSearch from '@/components/page-search/index'
 import PageContent from '@/components/page-content/index'
@@ -46,6 +48,21 @@ export default defineComponent({
     PageModal
   },
   setup() {
+    const store = useStore()
+    const modalConfigRef = computed(() => {
+      // 动态添加部门和角色列表
+      const departmentItem = modalConfig.formItems.find((item) => item.field === 'departmentId')
+      departmentItem!.options = store.state.entireDepartment.map((item: any) => {
+        return { label: item.name, value: item.id }
+      })
+
+      const roleItem = modalConfig.formItems.find((item) => item.field === 'roleId')
+      roleItem!.options = store.state.entireRole.map((item: any) => {
+        return { label: item.name, value: item.id }
+      })
+      return modalConfig
+    })
+
     const [pageContentRef, handleResetClick, handleQueryClick] = userPageSearch()
 
     const newCallback = () => {
@@ -56,12 +73,14 @@ export default defineComponent({
       const passwordItem = modalConfig.formItems.find((item) => item.field === 'password')
       passwordItem!.isHidden = true
     }
+
     const [PageModalRef, defaultInfo, handleNewData, handleEditData] = usePageModal(
       newCallback,
       editCallback
     )
 
     return {
+      modalConfigRef,
       PageModalRef,
       searchFormConfig,
       contentTableConfig,

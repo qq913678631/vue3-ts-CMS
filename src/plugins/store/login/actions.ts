@@ -7,12 +7,14 @@ import { userLoginRequest, getUserInfoById, getUserMenusById } from '@/service/l
 import { mapMenusToRoutees } from '@/utils/map-menus'
 
 export const actions: ActionTree<ILoginState, any> = {
-  async userLoginAction({ commit }, payload: IUser) {
+  async userLoginAction({ commit, dispatch }, payload: IUser) {
     // 1.实现登录逻辑
     const { data } = await userLoginRequest(payload)
     const { token, id } = data
     commit('setUserToken', token)
     localCache.setCache('token', token)
+
+    dispatch('getInitialDataAction', null, { root: true })
 
     // 2.请求登录用户信息
     const { data: userInfo } = await getUserInfoById(id)
