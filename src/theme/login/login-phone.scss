@@ -1,0 +1,9 @@
+.login-phone{
+  .authCode-wrap{
+    display: flex;
+    justify-content: space-between;
+    .el-input{
+      width: 80px;
+    }
+  }
+}

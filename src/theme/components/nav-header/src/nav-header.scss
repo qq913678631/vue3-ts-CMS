@@ -1,0 +1,29 @@
+.nav-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100% ;
+  .el-icon-s-fold,
+  .el-icon-s-unfold {
+    font-size: 30px;
+    cursor: pointer;
+  }
+  .content {
+    flex: 1;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .user-info {
+      .el-dropdown-link{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        span{
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}
