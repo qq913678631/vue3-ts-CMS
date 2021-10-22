@@ -13,7 +13,7 @@
           icon="el-icon-refresh"
           v-if="isCreate"
           @click="handleCreateClick"
-          >新建用户</el-button
+          >{{ createName }}</el-button
         >
       </template>
       <template #enable="{ row }">
@@ -78,6 +78,10 @@ export default defineComponent({
     pageName: {
       type: String,
       required: true
+    },
+    createName: {
+      type: String,
+      default: '新建用户'
     }
   },
   components: {

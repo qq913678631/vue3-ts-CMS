@@ -62,7 +62,6 @@ export default defineComponent({
       })
       return modalConfig
     })
-
     const [pageContentRef, handleResetClick, handleQueryClick] = userPageSearch()
 
     const newCallback = () => {

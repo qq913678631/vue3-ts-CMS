@@ -7,7 +7,7 @@
 import { computed, defineProps, withDefaults } from 'vue'
 import BaseEchart from '@/base-UI/echarts/index'
 
-const props = withDefaults(defineProps<{ title: string; xLabels: string[]; values: any[] }>(), {
+const props = withDefaults(defineProps<{ title?: string; xLabels: string[]; values: any[] }>(), {
   title: ''
 })
 

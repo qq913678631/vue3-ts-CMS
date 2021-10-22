@@ -8,8 +8,7 @@ import { defineProps } from 'vue'
 import { IDataType } from './type/type'
 import BaseEchart from '@/base-UI/echarts/index'
 
-const props = defineProps<{ roseData: IDataType }>()
-
+const props = defineProps<{ roseData: IDataType[] }>()
 const options = {
   legend: {
     top: 'bottom'

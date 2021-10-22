@@ -32,5 +32,21 @@ export const mutations: MutationTree<ISystemState> = {
 
   menuCountChange(state, menuCount: number) {
     state.menuCount = menuCount
+  },
+
+  departmentListChange(state, departmentList: any[]) {
+    state.departmentList = departmentList
+  },
+
+  departmentCountChange(state, departmentCount: number) {
+    state.departmentCount = departmentCount
+  },
+
+  categoryListChange(state, categoryList: any[]) {
+    state.categoryList = categoryList
+  },
+
+  categoryCountChange(state, categoryCount: number) {
+    state.categoryCount = categoryCount
   }
 }

@@ -8,12 +8,12 @@
       </el-col>
       <el-col :span="10">
         <zc-card title="不同城市商品销量">
-          <!-- <pie-echart :option="option"></pie-echart> -->
+          <map-echart :mapData="addressGoodsSale"></map-echart>
         </zc-card>
       </el-col>
       <el-col :span="7">
         <zc-card title="分类商品数量(玫瑰图)">
-          <rose-echart :roseData="categoryGoodsFavor"></rose-echart>
+          <rose-echart :roseData="categoryGoodsCount"></rose-echart>
         </zc-card>
       </el-col>
     </el-row>
@@ -26,7 +26,7 @@
       </el-col>
       <el-col :span="12">
         <zc-card title="分类商品的收藏">
-          <!-- <pie-echart :option="option"></pie-echart> -->
+          <bar-echart v-bind="categoryGoodsFavor"></bar-echart>
         </zc-card>
       </el-col>
     </el-row>
@@ -38,7 +38,13 @@ import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 
 import ZcCard from '@/base-UI/card/index'
-import { PieEchart, RoseEchart, LineEchart } from '@/components/page-echart/index'
+import {
+  PieEchart,
+  RoseEchart,
+  LineEchart,
+  BarEchart,
+  MapEchart
+} from '@/components/page-echart/index'
 
 export default defineComponent({
   name: 'dashboard',
@@ -46,7 +52,9 @@ export default defineComponent({
     ZcCard,
     PieEchart,
     RoseEchart,
-    LineEchart
+    LineEchart,
+    BarEchart,
+    MapEchart
   },
   setup() {
     const store = useStore()
@@ -69,11 +77,22 @@ export default defineComponent({
       return { title, xLabels, values }
     })
     const categoryGoodsFavor = computed(() => {
-      return store.state.dashboard.categoryGoodsFavor.map((item: any) => {
-        return { name: item.name, value: item.goodsFavor }
+      const title = '分类商品收藏'
+      const xLabels: string[] = []
+      const values: any[] = []
+      const categoryGoodsFavor = store.state.dashboard.categoryGoodsFavor
+      for (const item of categoryGoodsFavor) {
+        xLabels.push(item.name)
+        values.push(item.goodsFavor)
+      }
+      return { title, xLabels, values }
+    })
+    const addressGoodsSale = computed(() => {
+      return store.state.dashboard.addressGoodsSale.map((item: any) => {
+        return { name: item.address, value: item.count }
       })
     })
-    return { categoryGoodsCount, categoryGoodsSale, categoryGoodsFavor }
+    return { categoryGoodsCount, categoryGoodsSale, categoryGoodsFavor, addressGoodsSale }
   }
 })
 </script>

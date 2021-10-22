@@ -10,8 +10,9 @@ import * as echarts from 'echarts'
 
 const props = withDefaults(
   defineProps<{
-    title: string
-    data: any[]
+    title?: string
+    xLabels: any[]
+    values: any[]
   }>(),
   { title: '' }
 )
@@ -19,10 +20,10 @@ const props = withDefaults(
 const options = computed(() => {
   return {
     title: {
-      text: props.title,
-      subtext: 'Feature Sample: Gradient Color, Shadow, Click Zoom'
+      text: props.title
     },
     xAxis: {
+      data: props.xLabels,
       axisLabel: {
         inside: true,
         color: '#fff'
@@ -71,7 +72,7 @@ const options = computed(() => {
             ])
           }
         },
-        data: props.data
+        data: props.values
       }
     ]
   }

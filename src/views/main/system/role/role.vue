@@ -8,6 +8,7 @@
       pageName="role"
       @newBtnClick="handleNewData"
       @editBtnClick="handleEditData"
+      createName="新建角色"
     >
       <template #></template>
     </page-content>

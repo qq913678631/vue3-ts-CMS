@@ -10,12 +10,13 @@ export function usePageModal(newCallback?: CallbackType, editCallback?: Callback
     defaultInfo.value = {}
     if (PageModalRef.value) PageModalRef.value.dialogVisible = true
     newCallback && newCallback()
+
+    console.log('%c█🚀🚀🚀  -> :', 'color: #3ba776', defaultInfo.value)
   }
   const handleEditData = (row: any) => {
     defaultInfo.value = { ...row }
     if (PageModalRef.value) PageModalRef.value.dialogVisible = true
     editCallback && editCallback(row)
   }
-
   return [PageModalRef, defaultInfo, handleNewData, handleEditData]
 }

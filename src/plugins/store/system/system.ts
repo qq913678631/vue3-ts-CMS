@@ -15,7 +15,11 @@ const systemModule: Module<ISystemState, IRootState> = {
     goodsList: [],
     goodsCount: 0,
     menuList: [],
-    menuCount: 0
+    menuCount: 0,
+    departmentList: [],
+    departmentCount: 0,
+    categoryList: [],
+    categoryCount: 0
   },
   actions: actions,
   mutations: mutations,
