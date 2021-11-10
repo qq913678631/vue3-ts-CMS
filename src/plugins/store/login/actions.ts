@@ -25,7 +25,6 @@ export const actions: ActionTree<ILoginState, any> = {
     const { data: userMenus } = await getUserMenusById(id)
     commit('setUserMenus', userMenus)
     localCache.setCache('userMenus', userMenus)
-
     const routes = mapMenusToRoutees(userMenus)
     routes.forEach((route) => {
       router.addRoute('main', route)
@@ -33,7 +32,7 @@ export const actions: ActionTree<ILoginState, any> = {
     router.push('/main')
   },
 
-  loadLocalLogin({ commit }) {
+  async loadLocalLogin({ commit }) {
     const token = localCache.getCache('token')
     if (token) {
       commit('setUserToken', token)
