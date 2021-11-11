@@ -5,7 +5,7 @@ let firstMenu: any = null
 
 export function mapMenusToRoutees(userMenus: any): RouteRecordRaw[] {
   const routes: RouteRecordRaw[] = []
-  
+
   // 1.先加载默认所有的routes
   const allRoutes: RouteRecordRaw[] = []
   const routeFiles = require.context('../plugins/router/main', true, /\.ts/)

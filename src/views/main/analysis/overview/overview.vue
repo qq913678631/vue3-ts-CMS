@@ -1,6 +1,6 @@
 <template>
   <div class="overview">
-    <h2>overview</h2>
+    <h2>技术栈：vue3 + Ts + echarts</h2>
   </div>
 </template>
 
@@ -15,4 +15,12 @@ export default defineComponent({
 })
 </script>
 
-<style scoped></style>
+<style>
+.overview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  background-color: #fff;
+}
+</style>
